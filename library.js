@@ -14,8 +14,8 @@ function Book(title, author, year, length) {
 
 // Create book function
 function addBookToLibrary(title, author, year, length) {
-  const title = new Book(title, author, year, length);
-  libraryCollection.push(this.title);
+  const Bookname = new Book(title, author, year, length);
+  libraryCollection.push(Bookname);
 }
 
 addBookToLibrary('LOTR', 'JRR', 1954, 132);
