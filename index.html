@@ -5,6 +5,184 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Library app</title>
     <script defer src="/library.js"></script>
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="https://use.typekit.net/dcv1nmv.css" />
   </head>
-  <body></body>
+  <body>
+    <!-- book content -->
+    <p id="carusel"></p>
+
+    <!-- open modal btn -->
+    <button data-micromodal-trigger="modal-1" id="add-book">Add book</button>
+
+    <!-- modal -->
+    <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+      <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="workaround-micro-bug">
+          <div
+            class="modal__container"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-1-title">
+            <header class="modal__header">
+              <h2 class="modal__title" id="modal-1-title">Add a book</h2>
+              <button
+                class="modal__close"
+                aria-label="Close modal"
+                data-micromodal-close></button>
+            </header>
+            <main class="modal__content" id="modal-1-content">
+              <form
+                action="#"
+                method="post"
+                onsubmit="return validatePasswords()">
+                <fieldset>
+                  <legend>
+                    Add a book to the collection by filling out the information
+                    below.
+                  </legend>
+                  <div class="form-inputs">
+                    <div>
+                      <div class="input-container">
+                        <input
+                          type="text"
+                          name="first_name"
+                          id="first_name"
+                          class="input"
+                          placeholder="First name"
+                          required />
+                        <label for="first_name" class="label">First name</label>
+                        <button
+                          class="clear"
+                          type="button"
+                          data-input-id="first_name"
+                          aria-label="Clear input">
+                          <svg
+                            data-input-id="first_name"
+                            viewBox="0 0 16 16"
+                            width="12"
+                            height="12">
+                            <path
+                              d="M 1 1 L 15 15 M 1 15 L 15 1"
+                              fill="none"
+                              stroke-width="2"
+                              stroke="currentColor" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="input-container">
+                        <input
+                          type="text"
+                          name="first_name"
+                          id="first_name"
+                          class="input"
+                          placeholder="First name"
+                          required />
+                        <label for="first_name" class="label">First name</label>
+                        <button
+                          class="clear"
+                          type="button"
+                          data-input-id="first_name"
+                          aria-label="Clear input">
+                          <svg
+                            data-input-id="first_name"
+                            viewBox="0 0 16 16"
+                            width="12"
+                            height="12">
+                            <path
+                              d="M 1 1 L 15 15 M 1 15 L 15 1"
+                              fill="none"
+                              stroke-width="2"
+                              stroke="currentColor" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="input-container">
+                        <input
+                          type="text"
+                          name="first_name"
+                          id="first_name"
+                          class="input"
+                          placeholder="First name"
+                          required />
+                        <label for="first_name" class="label">First name</label>
+                        <button
+                          class="clear"
+                          type="button"
+                          data-input-id="first_name"
+                          aria-label="Clear input">
+                          <svg
+                            data-input-id="first_name"
+                            viewBox="0 0 16 16"
+                            width="12"
+                            height="12">
+                            <path
+                              d="M 1 1 L 15 15 M 1 15 L 15 1"
+                              fill="none"
+                              stroke-width="2"
+                              stroke="currentColor" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="input-container">
+                        <input
+                          type="text"
+                          name="first_name"
+                          id="first_name"
+                          class="input"
+                          placeholder="First name"
+                          required />
+                        <label for="first_name" class="label">First name</label>
+                        <button
+                          class="clear"
+                          type="button"
+                          data-input-id="first_name"
+                          aria-label="Clear input">
+                          <svg
+                            data-input-id="first_name"
+                            viewBox="0 0 16 16"
+                            width="12"
+                            height="12">
+                            <path
+                              d="M 1 1 L 15 15 M 1 15 L 15 1"
+                              fill="none"
+                              stroke-width="2"
+                              stroke="currentColor" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <footer class="modal__footer">
+                    <button class="modal__btn modal__btn-primary">
+                      Continue
+                    </button>
+                    <button
+                      class="modal__btn"
+                      data-micromodal-close
+                      aria-label="Close this dialog window">
+                      Close
+                    </button>
+                  </footer>
+                </fieldset>
+              </form>
+            </main>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+    <script>
+      MicroModal.init({
+        disableFocus: true,
+      });
+    </script>
+  </body>
 </html>

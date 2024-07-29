@@ -1,5 +1,7 @@
+// Initiate modal
+
 // Library array of
-const libraryCollection = ['test'];
+const libraryCollection = [];
 
 // Book constructor
 function Book(title, author, year, length) {
@@ -12,11 +14,21 @@ function Book(title, author, year, length) {
   };
 }
 
+// add dummy data
+addBookToLibrary('LOTR', 'JRR', 1954, 132);
+addBookToLibrary('Dune', 'ERR', 1423, 134);
+addBookToLibrary('GOT', 'GRRM', 2004, 1232);
+
 // Create book function
 function addBookToLibrary(title, author, year, length) {
-  const Bookname = new Book(title, author, year, length);
-  libraryCollection.push(Bookname);
+  const newBook = new Book(title, author, year, length);
+  libraryCollection.push(newBook);
 }
 
-addBookToLibrary('LOTR', 'JRR', 1954, 132);
+// Loop through collection and add title to paragraph
+let carusel = document.querySelector('#carusel');
+for (let i = 0; i < libraryCollection.length; i++) {
+  carusel.textContent += `${libraryCollection[i].title} `;
+}
+
 console.log(libraryCollection);
