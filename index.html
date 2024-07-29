@@ -4,9 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Library app</title>
-    <script defer src="/library.js"></script>
+    <link rel="icon" type="image/png" href="assets/books.png" sizes="any" />
     <link rel="stylesheet" href="/styles.css" />
     <link rel="stylesheet" href="https://use.typekit.net/dcv1nmv.css" />
+    <script defer src="/library.js"></script>
   </head>
   <body>
     <!-- book content -->
@@ -46,19 +47,19 @@
                       <div class="input-container">
                         <input
                           type="text"
-                          name="first_name"
-                          id="first_name"
+                          name="title"
+                          id="title"
                           class="input"
-                          placeholder="First name"
+                          placeholder="Title"
                           required />
-                        <label for="first_name" class="label">First name</label>
+                        <label for="title" class="label">Title</label>
                         <button
                           class="clear"
                           type="button"
-                          data-input-id="first_name"
+                          data-input-id="title"
                           aria-label="Clear input">
                           <svg
-                            data-input-id="first_name"
+                            data-input-id="title"
                             viewBox="0 0 16 16"
                             width="12"
                             height="12">
@@ -75,19 +76,19 @@
                       <div class="input-container">
                         <input
                           type="text"
-                          name="first_name"
-                          id="first_name"
+                          name="author"
+                          id="author"
                           class="input"
-                          placeholder="First name"
+                          placeholder="Author"
                           required />
-                        <label for="first_name" class="label">First name</label>
+                        <label for="author" class="label">Author</label>
                         <button
                           class="clear"
                           type="button"
-                          data-input-id="first_name"
+                          data-input-id="author"
                           aria-label="Clear input">
                           <svg
-                            data-input-id="first_name"
+                            data-input-id="author"
                             viewBox="0 0 16 16"
                             width="12"
                             height="12">
@@ -104,19 +105,19 @@
                       <div class="input-container">
                         <input
                           type="text"
-                          name="first_name"
-                          id="first_name"
+                          name="year"
+                          id="year"
                           class="input"
-                          placeholder="First name"
+                          placeholder="Year"
                           required />
-                        <label for="first_name" class="label">First name</label>
+                        <label for="year" class="label">Year</label>
                         <button
                           class="clear"
                           type="button"
-                          data-input-id="first_name"
+                          data-input-id="year"
                           aria-label="Clear input">
                           <svg
-                            data-input-id="first_name"
+                            data-input-id="year"
                             viewBox="0 0 16 16"
                             width="12"
                             height="12">
@@ -133,19 +134,19 @@
                       <div class="input-container">
                         <input
                           type="text"
-                          name="first_name"
-                          id="first_name"
+                          name="length"
+                          id="length"
                           class="input"
-                          placeholder="First name"
+                          placeholder="Length"
                           required />
-                        <label for="first_name" class="label">First name</label>
+                        <label for="first_name" class="label">Length</label>
                         <button
                           class="clear"
                           type="button"
-                          data-input-id="first_name"
+                          data-input-id="length"
                           aria-label="Clear input">
                           <svg
-                            data-input-id="first_name"
+                            data-input-id="length"
                             viewBox="0 0 16 16"
                             width="12"
                             height="12">
@@ -160,14 +161,14 @@
                     </div>
                   </div>
                   <footer class="modal__footer">
-                    <button class="modal__btn modal__btn-primary">
-                      Continue
-                    </button>
                     <button
                       class="modal__btn"
                       data-micromodal-close
                       aria-label="Close this dialog window">
                       Close
+                    </button>
+                    <button class="modal__btn modal__btn-primary">
+                      Continue
                     </button>
                   </footer>
                 </fieldset>
@@ -182,6 +183,8 @@
     <script>
       MicroModal.init({
         disableFocus: true,
+        awaitCloseAnimation: true,
+        awaitOpenAnimation: true,
       });
     </script>
   </body>

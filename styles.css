@@ -14,6 +14,10 @@
 
 }
 
+.workaround-micro-bug {
+    background: transparent;
+}
+
 .modal__overlay {
     position: fixed;
     top: 0;
@@ -63,8 +67,6 @@
 }
 
 .modal__content {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
     line-height: 1.5;
     color: var(--text-color);
 }
@@ -73,6 +75,7 @@
     display: flex;
     gap: 0.5rem;
     margin-top: 2rem;
+    justify-content: flex-end;
 }
 
 .modal__btn,
@@ -126,17 +129,18 @@ button#add-book:before {
 fieldset {
     border: none;
     border-radius: 8px;
+    margin: 1rem 0 0 0;
 }
 
 legend {
     color: var(--text-color);
-    margin-bottom: 1rem;
+    margin: 0 0 1rem 0;
 }
 
 .form-inputs {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.5rem;
 }
 
 .input-container {
