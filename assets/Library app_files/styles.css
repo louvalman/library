@@ -1,15 +1,14 @@
 * {
-    --primary-color: #1e1e1e;
+    --primary-color: #2e9c21;
     --border-bottom-style: 1px solid rgba(67, 69, 78, 0.4);
     --border-bottom-style-focus: 1px solid rgba(67, 69, 78, 0.8);
     --text-color: #1e1e1e;
     --background-color: #f1f1f1;
     --box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     background-color: #f1f1f1;
-    font-family: "noto-serif-georgian", sans-serif;
+    font-family: "forma-djr-micro", sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 body {
@@ -25,11 +24,7 @@ body {
 header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-}
-
-header h1 {
-    font-size: 1.8rem;
+    justify-content: flex-end;
 }
 
 #add-book {
@@ -40,9 +35,11 @@ header h1 {
 /** Main **/
 
 #card-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-    gap: 1rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 4px;
 }
 
 .card {
@@ -50,47 +47,27 @@ header h1 {
     box-shadow: var(--box-shadow);
     padding: 1rem;
     display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    max-width: 200rem;
-}
-
-.cover-remove-container {
-    display: flex;
-    justify-content: space-between;
-}
-
-.ghost-element {
-    width: 0.7rem;
+    flex-direction: row;
+    width: 20rem;
+    gap: 1rem;
 }
 
 .cover-img {
-    height: 12rem;
-    width: 9rem;
+    height: 8rem;
+    width: 7rem;
     border-radius: 0.5rem;
     align-self: center;
-}
-
-.remove-card {
-    width: 0.7rem;
-    opacity: 0.6;
-    cursor: pointer;
 }
 
 .information-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     width: 100%;
-    height: 100%;
-    gap: 2rem;
 }
 
-.read-length-container {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.9rem;
-    font-weight: 400;
+.information-container p:nth-child(3),
+.information-container p:nth-child(4) {
+    justify-items: flex-end;
 }
 
 .title-year-container {
@@ -107,10 +84,6 @@ header h1 {
 .title-year-container p:nth-child(2) {
     font-weight: 200;
     font-size: 0.9rem;
-}
-
-.card-content-check {
-    cursor: pointer;
 }
 
 /** Modal **/

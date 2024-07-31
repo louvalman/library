@@ -30,7 +30,7 @@ function Book(title, author, year, length, read, cover) {
   };
 }
 
-// Add dummy data
+// add dummy data
 addBookToLibrary(
   'Lord of the Rings',
   'J. R. R. Tolkien',
@@ -48,14 +48,6 @@ addBookToLibrary(
   true,
   '9780440423218'
 );
-addBookToLibrary(
-  'Billy Summers',
-  'Stephen King',
-  2021,
-  528,
-  true,
-  '1982173610'
-);
 
 // Create book function
 function addBookToLibrary(title, author, year, length, read, cover) {
@@ -70,13 +62,8 @@ function updateCollection() {
   cardContainer.innerHTML = '';
   for (let i = 0; i < libraryCollection.length; i++) {
     let card = document.createElement('div');
-    let coverRemoveContainer = document.createElement('div');
-    let ghostElement = document.createElement('div');
-    let removeCard = document.createElement('div');
     let titleYearContainer = document.createElement('div');
-    let authorTitleYearContainer = document.createElement('div');
     let informationContainer = document.createElement('div');
-    let readLengthContainer = document.createElement('div');
     let title = document.createElement('p');
     let author = document.createElement('p');
     let year = document.createElement('p');
@@ -85,9 +72,6 @@ function updateCollection() {
     let cover = document.createElement('img');
 
     card.classList.add('card');
-    coverRemoveContainer.classList.add('cover-remove-container');
-    ghostElement.classList.add('ghost-element');
-    removeCard.classList.add('remove-card');
     titleYearContainer.classList.add('title-year-container');
     informationContainer.classList.add('information-container');
     title.classList.add('card-content');
@@ -96,46 +80,29 @@ function updateCollection() {
     length.classList.add('card-content');
     read.classList.add('card-content-check');
     cover.classList.add('cover-img');
-    readLengthContainer.classList.add('read-length-container');
-    authorTitleYearContainer.classList.add('author-title-year-container');
 
-    removeCard.textContent = '✕';
     title.textContent += `${libraryCollection[i].title}`;
     author.textContent += `${libraryCollection[i].author}`;
     year.textContent += `${libraryCollection[i].year}`;
     length.textContent += `${libraryCollection[i].lengthPages}`;
-    if (libraryCollection[i].read == true) {
-      read.textContent += `Read`;
-    } else {
-      read.textContent += `Not read`;
-    }
+    read.textContent += `Read: ${libraryCollection[i].read}`;
     cover.src = `https://covers.openlibrary.org/b/isbn/${libraryCollection[i].cover}-L.jpg`;
 
-    card.setAttribute('data-index', i);
-
-    card.appendChild(coverRemoveContainer);
-    coverRemoveContainer.appendChild(ghostElement);
-    coverRemoveContainer.appendChild(cover);
-    coverRemoveContainer.appendChild(removeCard);
+    card.appendChild(cover);
     card.appendChild(informationContainer);
-    informationContainer.appendChild(authorTitleYearContainer);
-    authorTitleYearContainer.appendChild(titleYearContainer);
+    informationContainer.appendChild(titleYearContainer);
     titleYearContainer.appendChild(title);
     titleYearContainer.appendChild(year);
-    authorTitleYearContainer.appendChild(author);
-    informationContainer.appendChild(readLengthContainer);
-    readLengthContainer.appendChild(length);
-    readLengthContainer.appendChild(read);
+    informationContainer.appendChild(author);
+    informationContainer.appendChild(length);
+    informationContainer.appendChild(read);
 
     cardContainer.insertBefore(card, cardContainer.firstChild);
-
-    removeCard.addEventListener('click', removeBook);
   }
 }
 
 updateCollection();
 
-// Submit form script
 const form = document.getElementById('add-collection-form');
 form.addEventListener('submit', function (event) {
   event.preventDefault();
@@ -154,41 +121,4 @@ form.addEventListener('submit', function (event) {
   updateCollection();
 });
 
-// Change read status
-let readElement = document.querySelectorAll('.card-content-check');
-
-function toggleRead(event) {
-  const card = event.target.closest('.card');
-  const index = card.getAttribute('data-index');
-  const book = libraryCollection[index];
-
-  book.read = !book.read;
-
-  event.target.textContent = book.read ? 'Read' : 'Not read';
-}
-
-readElement.forEach(function (element) {
-  element.addEventListener('click', toggleRead);
-});
-
-// Remove book function
-function removeBook(event) {
-  const card = event.target.closest('.card');
-  const index = card.getAttribute('data-index');
-  const book = libraryCollection[index];
-
-  console.log(index);
-
-  libraryCollection.splice(index, 1);
-
-  updateCardIndices();
-  updateCollection();
-}
-
-// Update data-index attributes of remaining cards after removal
-function updateCardIndices() {
-  const cards = document.querySelectorAll('.card');
-  cards.forEach((card, index) => {
-    card.setAttribute('data-index', index);
-  });
-}
+console.log(libraryCollection);

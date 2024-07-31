@@ -6,11 +6,12 @@
     <title>Library app</title>
     <link rel="icon" type="image/png" href="assets/books.png" sizes="any" />
     <link rel="stylesheet" href="/styles.css" />
-    <link rel="stylesheet" href="https://use.typekit.net/dcv1nmv.css" />
+    <link rel="stylesheet" href="https://use.typekit.net/tii4vwt.css" />
     <script defer src="/library.js"></script>
   </head>
   <body>
     <header>
+      <h1>Book Collection</h1>
       <!-- open modal btn -->
       <button data-micromodal-trigger="modal-1" id="add-book">Add book</button>
     </header>
@@ -142,7 +143,7 @@
                             class="input"
                             placeholder="Length"
                             required />
-                          <label for="first_name" class="label">Length</label>
+                          <label for="length" class="label">Length</label>
                           <button
                             class="clear"
                             type="button"
@@ -150,6 +151,35 @@
                             aria-label="Clear input">
                             <svg
                               data-input-id="length"
+                              viewBox="0 0 16 16"
+                              width="12"
+                              height="12">
+                              <path
+                                d="M 1 1 L 15 15 M 1 15 L 15 1"
+                                fill="none"
+                                stroke-width="2"
+                                stroke="currentColor" />
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                      <div>
+                        <div class="input-container">
+                          <input
+                            type="text"
+                            name="cover"
+                            id="cover"
+                            class="input"
+                            placeholder="ISBN"
+                            required />
+                          <label for="cover" class="label">ISBN</label>
+                          <button
+                            class="clear"
+                            type="button"
+                            data-input-id="cover"
+                            aria-label="Clear input">
+                            <svg
+                              data-input-id="cover"
                               viewBox="0 0 16 16"
                               width="12"
                               height="12">

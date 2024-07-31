@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://127.0.0.1:5500/ -->
+<html lang="en"><input type="hidden" id="__yoroi_connector_api_injected_type" value="prod"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library app</title>
+    
+    
+    
+    <script defer="" src="./Library app_files/library.js"></script>
+  <style>
+            .flipX video::-webkit-media-text-track-display {
+                transform: matrix(-1, 0, 0, 1, 0, 0) !important;
+            }
+            .flipXY video::-webkit-media-text-track-display {
+                transform: matrix(-1, 0, 0, -1, 0, 0) !important;
+            }
+            .flipXYX video::-webkit-media-text-track-display {
+                transform: matrix(1, 0, 0, -1, 0, 0) !important;
+            }</style><style>
+            @keyframes blinkWarning {
+                0% { color: red; }
+                100% { color: white; }
+            }
+            @-webkit-keyframes blinkWarning {
+                0% { color: red; }
+                100% { color: white; }
+            }
+            .blinkWarning {
+                -webkit-animation: blinkWarning 1s linear infinite;
+                -moz-animation: blinkWarning 1s linear infinite;
+                animation: blinkWarning 1s linear infinite;
+            }</style><link rel="icon" type="image/png" href="http://127.0.0.1:5500/assets/books.png" sizes="any"><link rel="stylesheet" href="./Library app_files/styles.css"><link rel="stylesheet" href="./Library app_files/dcv1nmv.css"></head>
+  <body>
+    <header>
+      <!-- open modal btn -->
+      <button data-micromodal-trigger="modal-1" id="add-book">Add book</button>
+    </header>
+    <main>
+      <!-- book content -->
+      <div id="card-container"><div class="card"><img class="cover-img" src="./Library app_files/9780440423218-L.jpg"><div class="information-container"><div class="title-year-container"><p class="card-content">Game of Thrones</p><p class="card-content">2004</p></div><p class="card-content">George R. R. Martin</p><p class="card-content">1232 pages</p><p class="card-content-check">Read: true</p></div></div><div class="card"><img class="cover-img" src="./Library app_files/284504-L.jpg"><div class="information-container"><div class="title-year-container"><p class="card-content">Dune</p><p class="card-content">1965</p></div><p class="card-content">Frank Herbert</p><p class="card-content">134 pages</p><p class="card-content-check">Read: false</p></div></div><div class="card"><img class="cover-img hoverZoomLink" src="./Library app_files/0009293487-L.jpg"><div class="information-container"><div class="title-year-container"><p class="card-content">Lord of the Rings</p><p class="card-content">1954</p></div><p class="card-content">J. R. R. Tolkien</p><p class="card-content">132 pages</p><p class="card-content-check">Read: true</p></div></div></div>
+
+      <!-- modal -->
+      <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+        <div class="modal__overlay" tabindex="-1" data-micromodal-close="">
+          <div class="workaround-micro-bug">
+            <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+              <header class="modal__header">
+                <h2 class="modal__title" id="modal-1-title">Add a book</h2>
+                <button class="modal__close" aria-label="Close modal" data-micromodal-close=""></button>
+              </header>
+              <main class="modal__content" id="modal-1-content">
+                <form action="http://127.0.0.1:5500/#" method="post" onsubmit="" id="add-collection-form">
+                  <fieldset>
+                    <legend>
+                      Add a book to the collection by filling out the
+                      information below.
+                    </legend>
+                    <div class="form-inputs">
+                      <div>
+                        <div class="input-container">
+                          <input type="text" name="title" id="title" class="input" placeholder="Title" required="">
+                          <label for="title" class="label">Title</label>
+                          <button class="clear" type="button" data-input-id="title" aria-label="Clear input">
+                            <svg data-input-id="title" viewBox="0 0 16 16" width="12" height="12">
+                              <path d="M 1 1 L 15 15 M 1 15 L 15 1" fill="none" stroke-width="2" stroke="currentColor"></path>
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                      <div>
+                        <div class="input-container">
+                          <input type="text" name="author" id="author" class="input" placeholder="Author" required="">
+                          <label for="author" class="label">Author</label>
+                          <button class="clear" type="button" data-input-id="author" aria-label="Clear input">
+                            <svg data-input-id="author" viewBox="0 0 16 16" width="12" height="12">
+                              <path d="M 1 1 L 15 15 M 1 15 L 15 1" fill="none" stroke-width="2" stroke="currentColor"></path>
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                      <div>
+                        <div class="input-container">
+                          <input type="text" name="year" id="year" class="input" placeholder="Year" required="">
+                          <label for="year" class="label">Year</label>
+                          <button class="clear" type="button" data-input-id="year" aria-label="Clear input">
+                            <svg data-input-id="year" viewBox="0 0 16 16" width="12" height="12">
+                              <path d="M 1 1 L 15 15 M 1 15 L 15 1" fill="none" stroke-width="2" stroke="currentColor"></path>
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                      <div>
+                        <div class="input-container">
+                          <input type="text" name="length" id="length" class="input" placeholder="Length" required="">
+                          <label for="length" class="label">Length</label>
+                          <button class="clear" type="button" data-input-id="length" aria-label="Clear input">
+                            <svg data-input-id="length" viewBox="0 0 16 16" width="12" height="12">
+                              <path d="M 1 1 L 15 15 M 1 15 L 15 1" fill="none" stroke-width="2" stroke="currentColor"></path>
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                      <div>
+                        <div class="input-container">
+                          <input type="text" name="cover" id="cover" class="input" placeholder="ISBN" required="">
+                          <label for="cover" class="label">ISBN</label>
+                          <button class="clear" type="button" data-input-id="cover" aria-label="Clear input">
+                            <svg data-input-id="cover" viewBox="0 0 16 16" width="12" height="12">
+                              <path d="M 1 1 L 15 15 M 1 15 L 15 1" fill="none" stroke-width="2" stroke="currentColor"></path>
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="checkbox-container">
+                        <label for="read">Read</label>
+                        <input type="checkbox" name="read">
+                      </div>
+                    </div>
+                    <footer class="modal__footer">
+                      <button class="modal__btn" data-micromodal-close="" aria-label="Close this dialog window">
+                        Close
+                      </button>
+                      <button class="modal__btn modal__btn-primary submit-btn">
+                        Add to collection
+                      </button>
+                    </footer>
+                  </fieldset>
+                </form>
+              </main>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="./Library app_files/micromodal.min.js"></script>
+  <!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+
+</body></html>
