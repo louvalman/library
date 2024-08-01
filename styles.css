@@ -15,7 +15,7 @@
 
 body {
     display: grid;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0 2rem;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 8fr;
@@ -37,6 +37,8 @@ header h1 {
 #add-book {
     background-color: var(--primary-color) !important;
     color: #f1f1f1 !important;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .card-content-check:hover,
@@ -59,7 +61,7 @@ header h1 {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    max-width: 200rem;
+    max-width: 20rem;
 }
 
 .cover-remove-container {
@@ -446,4 +448,14 @@ div>.input:placeholder-shown+.label+.clear {
 .micromodal-slide .modal__container,
 .micromodal-slide .modal__overlay {
     will-change: transform;
+}
+
+@media only screen and (max-width: 600px) {
+    body {
+        grid-template-rows: 1fr 16fr;
+    }
+
+    #card-container {
+        grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    }
 }
