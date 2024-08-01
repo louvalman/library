@@ -41,7 +41,7 @@ header h1 {
 
 #card-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 16rem));
     gap: 1rem;
 }
 
@@ -66,7 +66,7 @@ header h1 {
 
 .cover-img {
     height: 12rem;
-    width: 9rem;
+    width: 8.5rem;
     border-radius: 0.5rem;
     align-self: center;
 }

@@ -5,7 +5,7 @@ MicroModal.init({
   awaitOpenAnimation: true,
 });
 
-// Clear input
+// Clear input value
 document.addEventListener('click', function (event) {
   let clearButton = event.target.closest('.clear');
   if (clearButton) {
@@ -63,7 +63,7 @@ function addBookToLibrary(title, author, year, length, read, cover) {
   libraryCollection.push(newBook);
 }
 
-// Loop through collection and add title to paragraph
+// Create book cards with content of libraryCollection array
 let cardContainer = document.querySelector('#card-container');
 
 function updateCollection() {
@@ -130,6 +130,7 @@ function updateCollection() {
     cardContainer.insertBefore(card, cardContainer.firstChild);
 
     removeCard.addEventListener('click', removeBook);
+    read.addEventListener('click', toggleRead);
   }
 }
 
@@ -155,8 +156,6 @@ form.addEventListener('submit', function (event) {
 });
 
 // Change read status
-let readElement = document.querySelectorAll('.card-content-check');
-
 function toggleRead(event) {
   const card = event.target.closest('.card');
   const index = card.getAttribute('data-index');
@@ -166,10 +165,6 @@ function toggleRead(event) {
 
   event.target.textContent = book.read ? 'Read' : 'Not read';
 }
-
-readElement.forEach(function (element) {
-  element.addEventListener('click', toggleRead);
-});
 
 // Remove book function
 function removeBook(event) {
