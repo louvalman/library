@@ -107,7 +107,7 @@ function updateCollection() {
     if (libraryCollection[i].read == true) {
       read.textContent += `Read`;
     } else {
-      read.textContent += `Not read`;
+      read.textContent += `Unread`;
     }
     cover.src = `https://covers.openlibrary.org/b/isbn/${libraryCollection[i].cover}-L.jpg`;
 
@@ -163,7 +163,7 @@ function toggleRead(event) {
 
   book.read = !book.read;
 
-  event.target.textContent = book.read ? 'Read' : 'Not read';
+  event.target.textContent = book.read ? 'Read' : 'Unread';
 }
 
 // Remove book function

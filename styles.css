@@ -6,7 +6,8 @@
     --background-color: #f1f1f1;
     --box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     background-color: #f1f1f1;
-    font-family: "noto-serif-georgian", sans-serif;
+    font-family: "thermal-variable", sans-serif;
+    letter-spacing: 0.025rem;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -30,11 +31,17 @@ header {
 
 header h1 {
     font-size: 1.8rem;
+    font-variation-settings: "wght"500;
 }
 
 #add-book {
     background-color: var(--primary-color) !important;
     color: #f1f1f1 !important;
+}
+
+.card-content-check:hover,
+#add-book:hover {
+    transform: scale(1.03);
 }
 
 /** Main **/
@@ -86,11 +93,10 @@ header h1 {
     gap: 2rem;
 }
 
-.read-length-container {
+.author-title-year-container {
     display: flex;
-    justify-content: space-between;
-    font-size: 0.9rem;
-    font-weight: 400;
+    flex-direction: column;
+    gap: 0.3rem;
 }
 
 .title-year-container {
@@ -107,10 +113,24 @@ header h1 {
 .title-year-container p:nth-child(2) {
     font-weight: 200;
     font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+.read-length-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    font-weight: 400;
 }
 
 .card-content-check {
     cursor: pointer;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    border-radius: 0.25rem;
+    transition: transform .25s ease-out;
 }
 
 /** Modal **/
@@ -215,6 +235,8 @@ header h1 {
     transform: scale(1.05);
 }
 
+
+
 .modal__btn-primary {
     background-color: var(--primary-color);
     color: var(--background-color);
@@ -292,6 +314,17 @@ div>input[type="text"],
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+}
+
+input[type="checkbox"] {
+    height: 1rem;
+    width: 1rem;
+    accent-color: var(--primary-color);
+    border-color: var(--border-bottom-style);
+}
+
+input[type="checkbox"]:hover {
+    cursor: pointer;
 }
 
 .input:focus {
