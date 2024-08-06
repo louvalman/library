@@ -14,7 +14,7 @@ document.addEventListener('click', function (event) {
   }
 });
 
-// Library array of
+// Library collection array
 const libraryCollection = [];
 
 // Book constructor
@@ -136,7 +136,7 @@ function updateCollection() {
 
 updateCollection();
 
-// Submit form script
+// Submit form
 const form = document.getElementById('add-collection-form');
 form.addEventListener('submit', function (event) {
   event.preventDefault();
