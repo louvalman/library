@@ -81,6 +81,8 @@ function updateCollection() {
     let author = document.createElement('p');
     let year = document.createElement('p');
     let length = document.createElement('p');
+    let iconSpan = document.createElement('span');
+    let iconImg = document.createElement('img');
     let read = document.createElement('p');
     let cover = document.createElement('img');
 
@@ -95,6 +97,7 @@ function updateCollection() {
     year.classList.add('card-content');
     length.classList.add('card-content');
     read.classList.add('card-content-check');
+    iconSpan.classList.add('status-icon');
     cover.classList.add('cover-img');
     readLengthContainer.classList.add('read-length-container');
     authorTitleYearContainer.classList.add('author-title-year-container');
@@ -104,11 +107,21 @@ function updateCollection() {
     author.textContent += `${libraryCollection[i].author}`;
     year.textContent += `${libraryCollection[i].year}`;
     length.textContent += `${libraryCollection[i].lengthPages}`;
+
     if (libraryCollection[i].read == true) {
-      read.textContent += `Read`;
+      read.textContent = `Read`;
+      iconImg.src = './assets/check.svg';
+      iconImg.alt = 'Read';
+      iconSpan.classList.add('read-icon');
+      read.classList.add('read');
     } else {
-      read.textContent += `Unread`;
+      read.textContent = `Unread`;
+      iconImg.src = './assets/xmark.svg';
+      iconImg.alt = 'Unread';
+      iconSpan.classList.add('unread-icon');
+      read.classList.add('unread');
     }
+
     cover.src = `https://covers.openlibrary.org/b/isbn/${libraryCollection[i].cover}-L.jpg`;
 
     card.setAttribute('data-index', i);
@@ -126,6 +139,8 @@ function updateCollection() {
     informationContainer.appendChild(readLengthContainer);
     readLengthContainer.appendChild(length);
     readLengthContainer.appendChild(read);
+    iconSpan.appendChild(iconImg);
+    read.appendChild(iconSpan);
 
     cardContainer.insertBefore(card, cardContainer.firstChild);
 
@@ -163,7 +178,28 @@ function toggleRead(event) {
 
   book.read = !book.read;
 
-  event.target.textContent = book.read ? 'Read' : 'Unread';
+  const readElement = event.target.closest('.card-content-check');
+  const iconSpan = readElement.querySelector('.status-icon');
+  const iconImg = iconSpan.querySelector('img');
+
+  readElement.textContent = book.read ? 'Read' : 'Unread';
+  readElement.appendChild(iconSpan);
+
+  if (book.read) {
+    iconImg.src = './assets/check.svg';
+    iconImg.alt = 'Read';
+    iconSpan.classList.add('read-icon');
+    iconSpan.classList.remove('unread-icon');
+    readElement.classList.add('read');
+    readElement.classList.remove('unread');
+  } else {
+    iconImg.src = './assets/xmark.svg';
+    iconImg.alt = 'Unread';
+    iconSpan.classList.add('unread-icon');
+    iconSpan.classList.remove('read-icon');
+    readElement.classList.add('unread');
+    readElement.classList.remove('read');
+  }
 }
 
 // Remove book function
