@@ -17,21 +17,43 @@ document.addEventListener('click', function (event) {
 // Library collection array
 const libraryCollection = [];
 
+let BOOK_ID_COUNTER = 0;
+
 // Book constructor
-function Book(title, author, year, length, read, cover) {
-  this.title = title;
-  this.author = author;
-  this.year = year;
-  this.lengthPages = `${length} pages`;
-  this.read = read;
-  this.cover = cover;
-  this.info = function () {
+class Book {
+  constructor(title, author, year, length, read, cover) {
+    this.id = ++BOOK_ID_COUNTER;
+    this.title = title;
+    this.author = author;
+    this.year = Number(year);
+    this._length = Number(length); // use underscore for private-ish fields
+    this._read = !!read;
+    this.cover = cover;
+  }
+
+  get lengthPages() {
+    return `${this._length} pages`;
+  }
+
+  get info() {
     return `${this.title} is a book written by ${this.author}, first published in ${this.year}. The book's length is ${this.lengthPages}.`;
-  };
+  }
+
+  // getter / setter for read status (illustrates get/set)
+  get read() {
+    return this._read;
+  }
+  set read(val) {
+    this._read = !!val;
+  }
+
+  toggleRead() {
+    this._read = !this._read;
+  }
 }
 
 // Add dummy data
-addBookToLibrary(
+const lotr = new Book(
   'Lord of the Rings',
   'J. R. R. Tolkien',
   1954,
@@ -39,8 +61,10 @@ addBookToLibrary(
   true,
   '0618343997'
 );
-addBookToLibrary('Dune', 'Frank Herbert', 1965, 134, false, '0441172717');
-addBookToLibrary(
+
+const dune = new Book('Dune', 'Frank Herbert', 1965, 134, false, '0441172717');
+
+const got = new Book(
   'Game of Thrones',
   'George R. R. Martin',
   2004,
@@ -48,7 +72,8 @@ addBookToLibrary(
   true,
   '9780440423218'
 );
-addBookToLibrary(
+
+const billySummers = new Book(
   'Billy Summers',
   'Stephen King',
   2021,
@@ -56,6 +81,9 @@ addBookToLibrary(
   true,
   '1982173610'
 );
+
+// Add them to your library array
+libraryCollection.push(lotr, dune, got, billySummers);
 
 // Create book function
 function addBookToLibrary(title, author, year, length, read, cover) {
@@ -87,6 +115,7 @@ function updateCollection() {
     let cover = document.createElement('img');
 
     card.classList.add('card');
+    card.setAttribute('data-id', libraryCollection[i].id);
     coverRemoveContainer.classList.add('cover-remove-container');
     ghostElement.classList.add('ghost-element');
     removeCard.classList.add('remove-card');
@@ -170,14 +199,23 @@ form.addEventListener('submit', function (event) {
   updateCollection();
 });
 
+// Find book through class-defined id
+function findBookIndexById(id) {
+  return libraryCollection.findIndex((b) => b.id === Number(id));
+}
+
 // Change read status
 function toggleRead(event) {
   const card = event.target.closest('.card');
-  const index = card.getAttribute('data-index');
+  const id = card.getAttribute('data-id');
+  const index = findBookIndexById(id);
+  if (index === -1) return;
   const book = libraryCollection[index];
 
-  book.read = !book.read;
+  // Use the class toggleRead method
+  book.toggleRead();
 
+  // Update DOM visuals (reuse your existing DOM update logic)
   const readElement = event.target.closest('.card-content-check');
   const iconSpan = readElement.querySelector('.status-icon');
   const iconImg = iconSpan.querySelector('img');
@@ -205,21 +243,10 @@ function toggleRead(event) {
 // Remove book function
 function removeBook(event) {
   const card = event.target.closest('.card');
-  const index = card.getAttribute('data-index');
-  const book = libraryCollection[index];
-
-  console.log(index);
+  const id = card.getAttribute('data-id');
+  const index = findBookIndexById(id);
+  if (index === -1) return;
 
   libraryCollection.splice(index, 1);
-
-  updateCardIndices();
   updateCollection();
-}
-
-// Update data-index attributes of remaining cards after removal
-function updateCardIndices() {
-  const cards = document.querySelectorAll('.card');
-  cards.forEach((card, index) => {
-    card.setAttribute('data-index', index);
-  });
 }
