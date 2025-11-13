@@ -14,15 +14,9 @@ document.addEventListener('click', function (event) {
   }
 });
 
-// Library collection array
-const libraryCollection = [];
-
-let BOOK_ID_COUNTER = 0;
-
-// Book constructor
+// Book class
 class Book {
   constructor(title, author, year, length, read, cover) {
-    this.id = ++BOOK_ID_COUNTER;
     this.title = title;
     this.author = author;
     this.year = Number(year);
@@ -51,6 +45,53 @@ class Book {
     this._read = !this._read;
   }
 }
+
+// Library class
+class Library {
+  constructor() {
+    this.collection = [];
+    this._nextId = 1; // internal id counter
+  }
+
+  _generateId() {
+    return this._nextId++;
+  }
+
+  addBook(title, author, year, length, read, cover) {
+    const id = this._generateId();
+    const book = new Book(title, author, year, length, read, cover);
+    // make sure the Book has the id assigned by library (overrides possible Book id)
+    book.id = id;
+    this.collection.push(book);
+    return book;
+  }
+
+  findIndexById(id) {
+    return this.collection.findIndex((b) => b.id === Number(id));
+  }
+
+  findById(id) {
+    const idx = this.findIndexById(id);
+    return idx === -1 ? null : this.collection[idx];
+  }
+
+  removeById(id) {
+    const idx = this.findIndexById(id);
+    if (idx === -1) return false;
+    this.collection.splice(idx, 1);
+    return true;
+  }
+
+  toggleReadById(id) {
+    const book = this.findById(id);
+    if (!book) return false;
+    book.toggleRead();
+    return true;
+  }
+}
+
+// Library collection array
+const library = new Library();
 
 // Add dummy data
 const lotr = new Book(
@@ -82,21 +123,37 @@ const billySummers = new Book(
   '1982173610'
 );
 
-// Add them to your library array
-libraryCollection.push(lotr, dune, got, billySummers);
+library.addBook(
+  'Lord of the Rings',
+  'J. R. R. Tolkien',
+  1954,
+  132,
+  true,
+  '0618343997'
+);
+library.addBook('Dune', 'Frank Herbert', 1965, 134, false, '0441172717');
+library.addBook(
+  'Game of Thrones',
+  'George R. R. Martin',
+  2004,
+  1232,
+  true,
+  '9780440423218'
+);
+library.addBook('Billy Summers', 'Stephen King', 2021, 528, true, '1982173610');
 
 // Create book function
 function addBookToLibrary(title, author, year, length, read, cover) {
   const newBook = new Book(title, author, year, length, read, cover);
-  libraryCollection.push(newBook);
+  library.collection.push(newBook);
 }
 
-// Create book cards with content of libraryCollection array
+// Create book cards with content of library.collection array
 let cardContainer = document.querySelector('#card-container');
 
 function updateCollection() {
   cardContainer.innerHTML = '';
-  for (let i = 0; i < libraryCollection.length; i++) {
+  for (let i = 0; i < library.collection.length; i++) {
     let card = document.createElement('div');
     let coverRemoveContainer = document.createElement('div');
     let ghostElement = document.createElement('div');
@@ -115,7 +172,7 @@ function updateCollection() {
     let cover = document.createElement('img');
 
     card.classList.add('card');
-    card.setAttribute('data-id', libraryCollection[i].id);
+    card.setAttribute('data-id', library.collection[i].id);
     coverRemoveContainer.classList.add('cover-remove-container');
     ghostElement.classList.add('ghost-element');
     removeCard.classList.add('remove-card');
@@ -132,12 +189,12 @@ function updateCollection() {
     authorTitleYearContainer.classList.add('author-title-year-container');
 
     removeCard.textContent = '✕';
-    title.textContent += `${libraryCollection[i].title}`;
-    author.textContent += `${libraryCollection[i].author}`;
-    year.textContent += `${libraryCollection[i].year}`;
-    length.textContent += `${libraryCollection[i].lengthPages}`;
+    title.textContent += `${library.collection[i].title}`;
+    author.textContent += `${library.collection[i].author}`;
+    year.textContent += `${library.collection[i].year}`;
+    length.textContent += `${library.collection[i].lengthPages}`;
 
-    if (libraryCollection[i].read == true) {
+    if (library.collection[i].read == true) {
       read.textContent = `Read`;
       iconImg.src = './assets/check.svg';
       iconImg.alt = 'Read';
@@ -151,7 +208,7 @@ function updateCollection() {
       read.classList.add('unread');
     }
 
-    cover.src = `https://covers.openlibrary.org/b/isbn/${libraryCollection[i].cover}-L.jpg`;
+    cover.src = `https://covers.openlibrary.org/b/isbn/${library.collection[i].cover}-L.jpg`;
 
     card.setAttribute('data-index', i);
 
@@ -184,7 +241,6 @@ updateCollection();
 const form = document.getElementById('add-collection-form');
 form.addEventListener('submit', function (event) {
   event.preventDefault();
-
   const title = document.getElementById('title').value;
   const author = document.getElementById('author').value;
   const year = document.getElementById('year').value;
@@ -192,16 +248,14 @@ form.addEventListener('submit', function (event) {
   const read = document.querySelector('input[name="read"]').checked;
   const cover = document.getElementById('cover').value;
 
-  addBookToLibrary(title, author, year, length, read, cover);
-
+  library.addBook(title, author, year, length, read, cover);
   form.reset();
-
   updateCollection();
 });
 
 // Find book through class-defined id
 function findBookIndexById(id) {
-  return libraryCollection.findIndex((b) => b.id === Number(id));
+  return library.collection.findIndex((b) => b.id === Number(id));
 }
 
 // Change read status
@@ -210,12 +264,12 @@ function toggleRead(event) {
   const id = card.getAttribute('data-id');
   const index = findBookIndexById(id);
   if (index === -1) return;
-  const book = libraryCollection[index];
+  const book = library.collection[index];
 
   // Use the class toggleRead method
   book.toggleRead();
 
-  // Update DOM visuals (reuse your existing DOM update logic)
+  // Update DOM visuals
   const readElement = event.target.closest('.card-content-check');
   const iconSpan = readElement.querySelector('.status-icon');
   const iconImg = iconSpan.querySelector('img');
@@ -244,9 +298,7 @@ function toggleRead(event) {
 function removeBook(event) {
   const card = event.target.closest('.card');
   const id = card.getAttribute('data-id');
-  const index = findBookIndexById(id);
-  if (index === -1) return;
-
-  libraryCollection.splice(index, 1);
+  if (!id) return;
+  library.removeById(id);
   updateCollection();
 }
