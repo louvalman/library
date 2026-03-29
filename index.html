@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="https://use.typekit.net/tii4vwt.css" />
     <script defer src="library.js"></script>
+    <script defer src="validation.js"></script>
   </head>
   <body>
     <header>
@@ -38,6 +39,7 @@
               <main class="modal__content" id="modal-1-content">
                 <form
                   action="#"
+                  novalidate
                   method="post"
                   onsubmit=""
                   id="add-collection-form">
@@ -108,11 +110,13 @@
                       <div>
                         <div class="input-container">
                           <input
-                            type="text"
+                            type="number"
                             name="year"
                             id="year"
                             class="input"
                             placeholder="Year"
+                            min="1000"
+                            max="2026"
                             required />
                           <label for="year" class="label">Year</label>
                           <button
@@ -137,11 +141,12 @@
                       <div>
                         <div class="input-container">
                           <input
-                            type="text"
+                            type="number"
                             name="length"
                             id="length"
                             class="input"
                             placeholder="Length"
+                            min="1"
                             required />
                           <label for="length" class="label">Length</label>
                           <button
