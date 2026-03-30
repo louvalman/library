@@ -2,10 +2,10 @@
     --primary-color: #1e1e1e;
     --border-bottom-style: 1px solid rgba(67, 69, 78, 0.4);
     --border-bottom-style-focus: 1px solid rgba(67, 69, 78, 0.8);
+    --border-bottom-invalid: 1px solid rgb(200, 50, 50);
     --text-color: #1e1e1e;
     --background-color: #f1f1f1;
     --box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    background-color: #f1f1f1;
     font-family: "thermal-variable", sans-serif;
     letter-spacing: 0.025rem;
     margin: 0;
@@ -14,6 +14,7 @@
 }
 
 body {
+    background-color: #f1f1f1;
     display: grid;
     min-height: 100vh;
     margin: 0 2rem;
@@ -31,11 +32,11 @@ header {
 
 header h1 {
     font-size: 1.8rem;
-    font-variation-settings: "wght"500;
+    font-variation-settings: "wght" 500;
 }
 
 h2 {
-    font-variation-settings: "wght"400;
+    font-variation-settings: "wght" 400;
 }
 
 #add-book {
@@ -43,6 +44,11 @@ h2 {
     color: #f1f1f1 !important;
     white-space: nowrap;
     overflow: hidden;
+    transition: background-color 250ms, color 250ms;
+}
+
+#add-book:hover {
+    background-color: #3a3a3a !important;
 }
 
 /** Main **/
@@ -108,7 +114,7 @@ h2 {
 }
 
 .title-year-container p:nth-child(1) {
-    font-variation-settings: "wght"400;
+    font-variation-settings: "wght" 400;
     font-size: 1.2rem;
 }
 
@@ -130,11 +136,15 @@ h2 {
     cursor: pointer;
     color: var(--primary-color);
     border-radius: 0.25rem;
-    transition: transform .25s ease-out;
+    transition: opacity 200ms;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.3rem;
+}
+
+.card-content-check:hover {
+    opacity: 0.6;
 }
 
 .status-icon {
@@ -147,11 +157,6 @@ h2 {
     width: 18px;
     height: 18px;
     opacity: 0.7;
-}
-
-.card-content-check:hover,
-#add-book:hover {
-    transform: scale(1.03);
 }
 
 /** Modal **/
@@ -222,45 +227,32 @@ h2 {
 
 .modal__btn,
 #add-book {
-    font-size: .875rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    padding-top: .5rem;
-    padding-bottom: .5rem;
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
     color: var(--text-color);
     background-color: rgb(222, 222, 222);
-    border-radius: .25rem;
-    border-style: none;
-    border-width: 0;
+    border-radius: 0.25rem;
+    border: none;
     cursor: pointer;
-    -webkit-appearance: button;
     appearance: button;
-    text-transform: none;
-    overflow: visible;
     line-height: 1.15;
     margin: 0;
-    will-change: transform;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    transition: -webkit-transform .25s ease-out;
-    transition: transform .25s ease-out;
-    transition: transform .25s ease-out, -webkit-transform .25s ease-out;
+    transition: background-color 200ms;
 }
 
 .modal__btn:focus,
 .modal__btn:hover {
-    -webkit-transform: scale(1.05);
-    transform: scale(1.05);
+    background-color: rgb(205, 205, 205);
 }
-
-
 
 .modal__btn-primary {
     background-color: var(--primary-color);
     color: var(--background-color);
+}
+
+.modal__btn-primary:hover,
+.modal__btn-primary:focus {
+    background-color: #3a3a3a;
 }
 
 button#add-book:before {
@@ -279,6 +271,16 @@ fieldset {
 legend {
     color: var(--text-color);
     margin: 0 0 1rem 0;
+}
+
+input.dirty:invalid {
+    border-bottom: var(--border-bottom-invalid) !important;
+}
+
+.error-message {
+    color: rgb(200, 50, 50);
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
 }
 
 .form-inputs {
@@ -302,7 +304,7 @@ legend {
     gap: 0.3em;
 }
 
-div>label {
+div > label {
     opacity: 0.99;
     font-size: 0.9em;
     font-weight: 400;
@@ -310,30 +312,31 @@ div>label {
     pointer-events: none;
 }
 
-div>label:not([for="read"]) {
+div > label:not([for="read"]) {
     position: absolute;
     top: 8px;
     left: 0;
     transform-origin: left center;
-    transition: transform .25s;
+    transition: transform 0.25s;
 }
 
-div>input[type="text"],
+input[required] + .label::after {
+    content: ' *';
+    color: rgba(200, 50, 50, 0.8);
+}
+
 .input {
     font-size: 1em;
     min-width: 240px;
     width: 100%;
-    padding: 8px 0;
-    padding-right: 10px;
+    padding: 8px 10px 8px 0;
     color: var(--text-color);
     border: none;
     border-bottom: var(--border-bottom-style);
-    border-radius: 0px;
-    outline: none !important;
+    border-radius: 0;
+    outline: none;
     transition: border-color 250ms;
     background-color: transparent;
-    -webkit-appearance: none;
-    -moz-appearance: none;
     appearance: none;
 }
 
@@ -341,7 +344,6 @@ input[type="checkbox"] {
     height: 1rem;
     width: 1rem;
     accent-color: var(--primary-color);
-    border-color: var(--border-bottom-style);
 }
 
 input[type="checkbox"]:hover {
@@ -349,23 +351,26 @@ input[type="checkbox"]:hover {
 }
 
 .input:focus {
-    border-color: var(--border-bottom-style-focus) !important;
+    border-bottom: var(--border-bottom-style-focus);
 }
 
 .input::placeholder {
     color: transparent;
 }
 
-.input:focus+.label,
-.input:not(:placeholder-shown)+.label {
+.input:focus + .label,
+.input:not(:placeholder-shown) + .label {
     transform: translateY(-105%) scale(0.75);
     opacity: 0.85;
+}
+
+.input:placeholder-shown {
+    border-bottom: var(--border-bottom-style);
 }
 
 .clear {
     cursor: pointer;
     appearance: none;
-    -webkit-appearance: none;
     position: absolute;
     top: 14px;
     right: 2px;
@@ -376,11 +381,10 @@ input[type="checkbox"]:hover {
     width: 10px;
     color: var(--text-color);
     opacity: 0.5;
-    transition: color 250ms;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: color 0.1s;
+    transition: opacity 0.1s;
 }
 
 .clear:hover,
@@ -388,56 +392,32 @@ input[type="checkbox"]:hover {
     opacity: 0.65;
 }
 
-div>.input:placeholder-shown+.label+.clear {
+div > .input:placeholder-shown + .label + .clear {
     display: none;
 }
 
-.input:placeholder-shown {
-    border-bottom: var(--border-bottom-style);
-}
-
-
 /**************************\
-    Demo Animation Style
-  \**************************/
-@keyframes mmfadeIn {
-    from {
-        opacity: 0;
-    }
+    Modal Animation
+\**************************/
 
-    to {
-        opacity: 1;
-    }
+@keyframes mmfadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 
 @keyframes mmfadeOut {
-    from {
-        opacity: 1;
-    }
-
-    to {
-        opacity: 0;
-    }
+    from { opacity: 1; }
+    to   { opacity: 0; }
 }
 
 @keyframes mmslideIn {
-    from {
-        transform: translateY(15%);
-    }
-
-    to {
-        transform: translateY(0);
-    }
+    from { transform: translateY(15%); }
+    to   { transform: translateY(0); }
 }
 
 @keyframes mmslideOut {
-    from {
-        transform: translateY(0);
-    }
-
-    to {
-        transform: translateY(-10%);
-    }
+    from { transform: translateY(0); }
+    to   { transform: translateY(-10%); }
 }
 
 .micromodal-slide {
@@ -449,19 +429,19 @@ div>.input:placeholder-shown+.label+.clear {
 }
 
 .micromodal-slide[aria-hidden="false"] .modal__overlay {
-    animation: mmfadeIn .3s cubic-bezier(0.0, 0.0, 0.2, 1);
+    animation: mmfadeIn 0.3s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .micromodal-slide[aria-hidden="false"] .modal__container {
-    animation: mmslideIn .3s cubic-bezier(0, 0, .2, 1);
+    animation: mmslideIn 0.3s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .micromodal-slide[aria-hidden="true"] .modal__overlay {
-    animation: mmfadeOut .3s cubic-bezier(0.0, 0.0, 0.2, 1);
+    animation: mmfadeOut 0.3s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .micromodal-slide[aria-hidden="true"] .modal__container {
-    animation: mmslideOut .3s cubic-bezier(0, 0, .2, 1);
+    animation: mmslideOut 0.3s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .micromodal-slide .modal__container,

@@ -93,43 +93,14 @@ class Library {
 // Library collection array
 const library = new Library();
 
-// Add dummy data
-const lotr = new Book(
-  'Lord of the Rings',
-  'J. R. R. Tolkien',
-  1954,
-  132,
-  true,
-  '0618343997'
-);
-
-const dune = new Book('Dune', 'Frank Herbert', 1965, 134, false, '0441172717');
-
-const got = new Book(
-  'Game of Thrones',
-  'George R. R. Martin',
-  2004,
-  1232,
-  true,
-  '9780440423218'
-);
-
-const billySummers = new Book(
-  'Billy Summers',
-  'Stephen King',
-  2021,
-  528,
-  true,
-  '1982173610'
-);
-
+// Add test data
 library.addBook(
   'Lord of the Rings',
   'J. R. R. Tolkien',
   1954,
   132,
   true,
-  '0618343997'
+  '0618343997',
 );
 library.addBook('Dune', 'Frank Herbert', 1965, 134, false, '0441172717');
 library.addBook(
@@ -138,7 +109,7 @@ library.addBook(
   2004,
   1232,
   true,
-  '9780440423218'
+  '9780440423218',
 );
 library.addBook('Billy Summers', 'Stephen King', 2021, 528, true, '1982173610');
 
@@ -236,22 +207,6 @@ function updateCollection() {
 }
 
 updateCollection();
-
-// Submit form
-const form = document.getElementById('add-collection-form');
-form.addEventListener('submit', function (event) {
-  event.preventDefault();
-  const title = document.getElementById('title').value;
-  const author = document.getElementById('author').value;
-  const year = document.getElementById('year').value;
-  const length = document.getElementById('length').value;
-  const read = document.querySelector('input[name="read"]').checked;
-  const cover = document.getElementById('cover').value;
-
-  library.addBook(title, author, year, length, read, cover);
-  form.reset();
-  updateCollection();
-});
 
 // Find book through class-defined id
 function findBookIndexById(id) {

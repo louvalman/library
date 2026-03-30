@@ -54,7 +54,6 @@ function showValidationMessage(input, result) {
     const errorMessage = document.createElement('span');
     errorMessage.classList.add('error-message');
     errorMessage.textContent = result.message;
-    errorMessage.style.color = 'red';
     input.parentNode.appendChild(errorMessage);
   } else if (existing && !result.valid) {
     existing.textContent = result.message;
@@ -67,12 +66,76 @@ function showValidationMessage(input, result) {
 
 function initFieldValidation(input, validator) {
   input.addEventListener('blur', () => {
+    input.classList.add('dirty');
     const result = validator(input.value);
     showValidationMessage(input, result);
   });
 
   input.addEventListener('input', () => {
-    const result = validator(input.value);
-    showValidationMessage(input, result);
+    if (input.classList.contains('dirty')) {
+      const result = validator(input.value);
+      showValidationMessage(input, result);
+    }
   });
 }
+
+// call initFieldValidation for each input field
+const titleInput = document.getElementById('title');
+const authorInput = document.getElementById('author');
+const yearInput = document.getElementById('year');
+const lengthInput = document.getElementById('length');
+const isbnInput = document.getElementById('isbn');
+
+initFieldValidation(titleInput, validateTitle);
+initFieldValidation(authorInput, validateAuthor);
+initFieldValidation(yearInput, validateYear);
+initFieldValidation(lengthInput, validateLength);
+initFieldValidation(isbnInput, validateISBN);
+
+// Define fields and validators for form submission validation
+const fields = [
+  { input: titleInput, validator: validateTitle },
+  { input: authorInput, validator: validateAuthor },
+  { input: yearInput, validator: validateYear },
+  { input: lengthInput, validator: validateLength },
+  { input: isbnInput, validator: validateISBN },
+];
+
+// Submit form
+const form = document.getElementById('add-collection-form');
+
+form.addEventListener('submit', (event) => {
+  event.preventDefault();
+  let formIsValid = true;
+
+  fields.forEach(({ input, validator }) => {
+    input.classList.add('dirty');
+    const result = validator(input.value);
+    showValidationMessage(input, result);
+    if (!result.valid) {
+      formIsValid = false;
+    }
+  });
+
+  if (formIsValid) {
+    library.addBook(
+      titleInput.value,
+      authorInput.value,
+      yearInput.value,
+      lengthInput.value,
+      document.querySelector('input[name="read"]').checked,
+      isbnInput.value,
+    );
+    updateCollection();
+    // reset the form
+    form.reset();
+    // remove dirty class and validation messages
+    fields.forEach(({ input }) => {
+      input.classList.remove('dirty');
+      const existing = input.parentNode.querySelector('.error-message');
+      if (existing) {
+        input.parentNode.removeChild(existing);
+      }
+    });
+  }
+});
