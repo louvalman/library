@@ -62,7 +62,7 @@ function showValidationMessage(input, result) {
   }
 }
 
-// add eventlisteners (blue and input) to form inputs for real-time validation
+// add event listeners (blue and input) to form inputs for real-time validation
 
 function initFieldValidation(input, validator) {
   input.addEventListener('blur', () => {
